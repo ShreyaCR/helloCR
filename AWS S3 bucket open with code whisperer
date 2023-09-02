@@ -1,0 +1,13 @@
+import boto3
+import os
+session = boto3.session.Session(aws_access_key_id-AWS-ACCESS_KEY-ID, aws_secret_access_key-AWS_SECRET_ACCESS_KEY, aws_session_token-AWS_SESSION_TOKEN)
+#proceed to create clients/ resources fron the session
+#for example, an s3 client
+#client= session.client('s3')
+s3 = boto3.client('s3')
+#call s3 to create the bucket.
+bucket_name = 'aws-jam-' + str(int(time.time()))
+s3.create_bucket(Bucket= bucket_name)
+#print out the bucket name
+print(bucket_name)
+
