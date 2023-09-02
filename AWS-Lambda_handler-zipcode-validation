@@ -1,0 +1,34 @@
+import os
+import boto3
+import json
+import re
+QUEUE_URL = os.getenv("QUEUE_URL", default = "test") # to get the environment
+sqs= boto3.client('sqs')
+#function to send message to SQS.
+def send_message_sqs(body):
+  print('sending message to SQS')
+  sqs.send_message(
+            QueueUrl= QUEUE_URL,
+            MessageBody = jason.dumps(body)
+  )
+#function to validate zipcode
+def validate_zip(zip):
+  if len(zip) == 5:
+    if zip.isdigit():
+        return True
+ #Lambda function to  publish User function to the queue.
+def lambda_handler(event, context):
+  print(event)
+  try:
+      body=jason.loads(event['body'])
+      send_message_sqs(body)
+  #validate zip code.
+  if not validate_zip(body['zip']):
+      return{'statuscode': 400}
+  return{'statuscode': 200}
+  except Exception as e:
+      print(e)
+      return{'statuscode': 500}
+  
+      
+  
